@@ -39,3 +39,5 @@ else
     grep "Convergence limit for maximum gradient" out.out | tail -1
   fi
 fi
+
+squeue
