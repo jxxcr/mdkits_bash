@@ -1,0 +1,6 @@
+#!/bin/bash
+filename=$1
+
+path=`realpath $filename`
+
+echo "$ssh_name:$path"
