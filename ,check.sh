@@ -11,7 +11,7 @@ then
 
   tail $prefix-BAND*.out; grep "\[ .*\]" $prefix-BAND${s[0]}.out | tail -4; grep "Step  Nr" $prefix-BAND${s[0]}.out | tail -1
 
-  if [ -p "$prefix-pos-Replica_nr_${s[0]}-1.xyz" ]
+  if [ -f "$prefix-pos-Replica_nr_${s[0]}-1.xyz" ]
   then
     >path1.xyz; for i in ${s[@]}; do head -n $anumber $prefix-pos-Replica_nr_$i-1.xyz>>path1.xyz; done; ,rp path1.xyz
     >path2.xyz; for i in ${s[@]}; do tail -n $anumber $prefix-pos-Replica_nr_$i-1.xyz>>path2.xyz; done; ,rp path2.xyz
