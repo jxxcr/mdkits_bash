@@ -11,20 +11,24 @@ then
 
   tail $prefix-BAND*.out; grep "\[ .*\]" $prefix-BAND${s[0]}.out | tail -4; grep "Step  Nr" $prefix-BAND${s[0]}.out | tail -1
 
-  >path1.xyz; for i in ${s[@]}; do head -n $anumber $prefix-pos-Replica_nr_$i-1.xyz>>path1.xyz; done; ,rp path1.xyz
-  >path2.xyz; for i in ${s[@]}; do tail -n $anumber $prefix-pos-Replica_nr_$i-1.xyz>>path2.xyz; done; ,rp path2.xyz
+  if [ -p "$prefix-pos-Replica_nr_${s[0]}-1.xyz" ]
+  then
+    >path1.xyz; for i in ${s[@]}; do head -n $anumber $prefix-pos-Replica_nr_$i-1.xyz>>path1.xyz; done; ,rp path1.xyz
+    >path2.xyz; for i in ${s[@]}; do tail -n $anumber $prefix-pos-Replica_nr_$i-1.xyz>>path2.xyz; done; ,rp path2.xyz
 
-  > ene.dat
-  enei=`grep ENERGY $prefix-BAND${s[0]}.out| tail -1| awk '{print $9}'`
-  for i in ${s[@]}
-  do
-    ene=`grep ENERGY $prefix-BAND$i.out| tail -1| awk '{print $9}'`
+    > ene.dat
+    enei=`grep ENERGY $prefix-BAND${s[0]}.out| tail -1| awk '{print $9}'`
+    for i in ${s[@]}
+    do
+      ene=`grep ENERGY $prefix-BAND$i.out| tail -1| awk '{print $9}'`
 
-    enec=`python -c "print(($ene - $enei)*27.2114)"`
-    echo -e "$i\t$ene\t$enec" >> ene.dat
-  done
+      enec=`python -c "print(($ene - $enei)*27.2114)"`
+      echo -e "$i\t$ene\t$enec" >> ene.dat
+    done
 
-  cat ene.dat
+    cat ene.dat
+  fi
+
 else
   if [[ -e "./${prefix}-1.ener" ]]
   then
