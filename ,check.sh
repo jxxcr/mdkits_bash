@@ -1,5 +1,9 @@
 term=$1
-prefix=`grep PROJECT input.inp | awk '{print $2}' | tr -d '\r'`
+
+if [ -f "input.inp" ]
+then
+  prefix=`grep PROJECT input.inp | awk '{print $2}' | tr -d '\r'`
+fi
 
 #if [[ $term == 'neb' ]]
 if find . -maxdepth 1 -name "*BAND*" -print -quit | grep -q .
