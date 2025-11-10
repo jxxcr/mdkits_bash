@@ -1,4 +1,5 @@
 term=$1
+separate="==========================================================================================================\n"
 
 if [ -f "input.inp" ]
 then
@@ -15,6 +16,7 @@ then
   if [ -f "$prefix-BAND${s[0]}.out" ]
   then
     tail $prefix-BAND*.out; grep "\[ .*\]" $prefix-BAND${s[0]}.out | tail -4; grep "Step  Nr" $prefix-BAND${s[0]}.out | tail -1
+    echo -e $separate
   fi
 
   if [ -f "$prefix-pos-Replica_nr_${s[0]}-1.xyz" ]
@@ -23,6 +25,7 @@ then
 
     >path1.xyz; for i in ${s[@]}; do head -n $anumber $prefix-pos-Replica_nr_$i-1.xyz>>path1.xyz; done; ,rp path1.xyz
     >path2.xyz; for i in ${s[@]}; do tail -n $anumber $prefix-pos-Replica_nr_$i-1.xyz>>path2.xyz; done; ,rp path2.xyz
+    echo -e $separate
 
     > ene.dat
     enei=`grep ENERGY $prefix-BAND${s[0]}.out| tail -1| awk '{print $9}'`
@@ -35,6 +38,7 @@ then
     done
 
     cat ene.dat
+    echo -e $separate
   fi
 
 else
@@ -43,16 +47,27 @@ else
     if [[ -e "./${prefix}-1.ener" ]]
     then
       tail out.out; tail ${prefix}-1.ener
+      echo -e $separate
       ,rp ${prefix}-pos-1.xyz
+      echo -e $separate
     else
       tail out.out
+      echo -e $separate
       grep STEP out.out| tail
+      echo -e $separate
       grep "Used time" out.out | tail
       grep "Maximum step size        " out.out | tail -1
       grep "Convergence limit for maximum step size" out.out | tail -1
       grep "Maximum gradient        " out.out | tail -1
       grep "Convergence limit for maximum gradient" out.out | tail -1
+      echo -e $separate
     fi
+  elif [ -f "OUTCAR" ]
+  then
+    tail OUTCAR
+    echo -e $separate
+    tail OSZICAR
+    echo -e $separate
   fi
 fi
 
