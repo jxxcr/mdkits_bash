@@ -43,6 +43,7 @@ else
     if [[ -e "./${prefix}-1.ener" ]]
     then
       tail out.out; tail ${prefix}-1.ener
+      ,rp ${prefix}-pos-1.xyz
     else
       tail out.out
       grep STEP out.out| tail
