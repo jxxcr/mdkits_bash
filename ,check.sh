@@ -15,7 +15,11 @@ then
 
   if [ -f "$prefix-BAND${s[0]}.out" ]
   then
-    tail $prefix-BAND*.out; grep "\[ .*\]" $prefix-BAND${s[0]}.out | tail -4; grep "Step  Nr" $prefix-BAND${s[0]}.out | tail -1
+    tail $prefix-BAND*.out
+    echo -e $separate
+    grep "\[ .*\]" $prefix-BAND${s[0]}.out | tail -4
+    echo -e $separate
+    grep "Step  Nr" $prefix-BAND${s[0]}.out | tail -1
     echo -e $separate
   fi
 
