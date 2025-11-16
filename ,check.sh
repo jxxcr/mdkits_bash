@@ -60,6 +60,7 @@ else
       grep STEP out.out| tail
       echo -e $separate
       grep "Used time" out.out | tail
+      echo -e $separate
       grep "Maximum step size        " out.out | tail -1
       grep "Convergence limit for maximum step size" out.out | tail -1
       grep "Maximum gradient        " out.out | tail -1
