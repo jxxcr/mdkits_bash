@@ -1,7 +1,7 @@
 term=$1
 separate="==========================================================================================================\n"
 
-if [ -f "input.inp" ]
+if [ -f "cp2k.slurm" ]
 then
   prefix=`grep PROJECT input.inp | awk '{print $2}' | tr -d '\r'`
 fi
@@ -46,7 +46,7 @@ then
   fi
 
 else
-  if [ -f "out.out" ]
+  if [ -f "cp2k.slurm" ]
   then
     if [[ -e "./${prefix}-1.ener" ]]
     then
@@ -72,6 +72,12 @@ else
     tail OUTCAR
     echo -e $separate
     tail OSZICAR
+    echo -e $separate
+  elif [ -f "lammps.slurm" ]
+  then
+    tail out.out
+    echo -e $separate
+    tail fp.dat
     echo -e $separate
   fi
 fi
