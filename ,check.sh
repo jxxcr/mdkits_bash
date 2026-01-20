@@ -7,7 +7,7 @@ then
 fi
 
 #if [[ $term == 'neb' ]]
-if find . -maxdepth 1 -name "*BAND*" -print -quit | grep -q .
+if find . -maxdepth 1 -name "*BAND*" -print -quit | grep -q . && [ -f "cp2k.slurm" ]
 then
   number=`grep NUMBER_OF_REPLICA input.inp | awk '{print $2}' | tr -d '\r'`
   st=`seq -w 1 $number`
@@ -79,6 +79,13 @@ else
     echo -e $separate
     tail fp.dat
     echo -e $separate
+  elif [ -f "abinit.slurm" ]
+  then
+    grep "max grad" out.out | tail
+    echo -e $separate
+    grep "wall_time" out.out | tail
+    echo -e $separate
+    grep "ETOT" out.out | tail
   fi
 fi
 
