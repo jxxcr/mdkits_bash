@@ -17,9 +17,9 @@ then
   then
     tail $prefix-BAND*.out
     echo -e $separate
-    grep "\[ .*\]" $prefix-BAND${s[0]}.out | tail -4
+    grep --color=always "\[ .*\]" $prefix-BAND${s[0]}.out | tail -4
     echo -e $separate
-    grep "Step  Nr" $prefix-BAND${s[0]}.out | tail -1
+    grep --color=always "Step  Nr" $prefix-BAND${s[0]}.out | tail -1
     echo -e $separate
   fi
 
@@ -57,14 +57,14 @@ else
     else
       tail out.out
       echo -e $separate
-      grep STEP out.out| tail
+      grep --color=always STEP out.out| tail
       echo -e $separate
-      grep "Used time" out.out | tail
+      grep --color=always "Used time" out.out | tail
       echo -e $separate
-      grep "Maximum step size        " out.out | tail -1
-      grep "Convergence limit for maximum step size" out.out | tail -1
-      grep "Maximum gradient        " out.out | tail -1
-      grep "Convergence limit for maximum gradient" out.out | tail -1
+      grep --color=always "Maximum step size        " out.out | tail -1
+      grep --color=always "Convergence limit for maximum step size" out.out | tail -1
+      grep --color=always "Maximum gradient        " out.out | tail -1
+      grep --color=always "Convergence limit for maximum gradient" out.out | tail -1
       echo -e $separate
     fi
   elif [ -f "OUTCAR" ]
@@ -81,11 +81,11 @@ else
     echo -e $separate
   elif [ -f "abinit.slurm" ]
   then
-    grep "max grad" out.out | tail
+    grep --color=always "max grad" out.out | tail
     echo -e $separate
-    grep "wall_time" out.out | tail
+    grep --color=always "wall_time" out.out | tail
     echo -e $separate
-    grep "ETOT" out.out | tail
+    grep --color=always "ETOT" out.out | tail
   fi
 fi
 
