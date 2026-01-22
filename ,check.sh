@@ -85,6 +85,8 @@ else
     echo -e $separate
     grep --color=always "wall_time" out.out | tail
     echo -e $separate
+    grep --color=always "converged" out.out | tail
+    echo -e $separate
     grep --color=always "ETOT" out.out | tail
     echo -e $separate
   fi
